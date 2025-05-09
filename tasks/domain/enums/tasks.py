@@ -15,3 +15,15 @@ class TaskDifficulty(models.TextChoices):
 class EducationLevel(models.TextChoices):
     MATURA_BASIC = "MATURA_BASIC"
     MATURA_EXTENDED = "MATURA_EXTENDED"
+
+
+class TaskBlockType(models.TextChoices):
+    TEXT = "TEXT"
+    IMAGE = "IMAGE"
+    LATEX = "LATEX"
+
+
+class ClosedAnswerType(models.TextChoices):
+    TEXT = "TEXT"
+    IMAGE = "IMAGE"
+    LATEX = "LATEX"
