@@ -4,7 +4,7 @@ from django.contrib.auth.models import (
     BaseUserManager,
     PermissionsMixin,
 )
-from users.domain.enums.users import UserRole
+from users.domain.enums.users import UserGender, UserRole
 
 
 class UserManager(BaseUserManager):
@@ -50,7 +50,16 @@ class User(AbstractBaseUser, PermissionsMixin):
         max_length=20,
         choices=UserRole.choices,
     )
+    gender = models.CharField(
+        max_length=20,
+        choices=UserGender.choices,
+    )
     terms_confirmed = models.BooleanField(default=False)
+
+    avatar = models.ImageField(
+        upload_to="avatars/",
+        default="assets/default_images/default_avatar.png",
+    )
 
     objects = UserManager()
 

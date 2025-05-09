@@ -91,10 +91,15 @@ class ManageUserSerializer(serializers.ModelSerializer):
             "password2",
             "role",
             "terms_confirmed",
+            "gender",
+            "avatar",
         ]
 
     def validate(self, attrs):
-        if attrs["password"] != attrs["password2"]:
+        password = attrs.get("password", None)
+        password2 = attrs.get("password2", None)
+
+        if password and password != password2:
             raise serializers.ValidationError(
                 {"password": "Password fields didn't match."}
             )
