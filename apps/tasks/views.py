@@ -1,7 +1,7 @@
 from rest_framework import mixins, viewsets
 
-from tasks import models
-from tasks import serializers
+from apps.tasks import models
+from apps.tasks import serializers
 
 
 class TaskViewSet(

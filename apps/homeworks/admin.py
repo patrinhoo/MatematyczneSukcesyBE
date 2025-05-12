@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from homeworks import models
+from apps.homeworks import models
 
 
 admin.site.register(models.Homework)

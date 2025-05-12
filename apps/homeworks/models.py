@@ -1,7 +1,7 @@
 from django.db import models
 from django.conf import settings
 
-from tasks import models as tasks_models
+from apps.tasks import models as tasks_models
 
 
 class Homework(models.Model):

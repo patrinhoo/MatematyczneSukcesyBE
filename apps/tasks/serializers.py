@@ -1,7 +1,7 @@
 from rest_framework import serializers
 
-from tasks import models
-from core import serializers as core_serializers
+from apps.tasks import models
+from apps.core import serializers as core_serializers
 
 
 class TaskBlockSerializer(serializers.ModelSerializer):

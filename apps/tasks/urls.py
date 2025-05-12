@@ -1,11 +1,11 @@
 from django.urls import path, include
 from rest_framework.routers import DefaultRouter
 
-from core import views
+from apps.tasks import views
 
 
 router = DefaultRouter()
-router.register(r"categories", views.CategoryViewSet, basename="category")
+router.register(r"tasks", views.TaskViewSet, basename="get-tasks")
 
 urlpatterns = [
     path("", include(router.urls)),

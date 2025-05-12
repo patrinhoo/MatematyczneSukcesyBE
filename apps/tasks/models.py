@@ -1,8 +1,8 @@
 from django.db import models
 from django.conf import settings
 
-from core import models as core_models
-from tasks.domain.enums.tasks import (
+from apps.core import models as core_models
+from apps.tasks.domain.enums.tasks import (
     TaskType,
     TaskDifficulty,
     EducationLevel,

@@ -4,7 +4,7 @@ from django.contrib.auth.models import (
     BaseUserManager,
     PermissionsMixin,
 )
-from users.domain.enums.users import UserGender, UserRole
+from apps.users.domain.enums.users import UserGender, UserRole
 
 
 class UserManager(BaseUserManager):

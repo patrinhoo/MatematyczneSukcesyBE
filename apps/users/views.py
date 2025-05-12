@@ -5,7 +5,7 @@ from rest_framework_simplejwt.views import TokenObtainPairView
 from rest_framework_simplejwt.authentication import JWTAuthentication
 
 
-from users import serializers
+from apps.users import serializers
 
 
 class RegisterUserView(generics.CreateAPIView):
