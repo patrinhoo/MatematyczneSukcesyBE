@@ -104,3 +104,13 @@ class ManageUserSerializer(serializers.ModelSerializer):
                 {"password": "Password fields didn't match."}
             )
         return attrs
+
+
+class BasicUserInfoSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = get_user_model()
+        fields = [
+            "given_name",
+            "last_name",
+            "avatar",
+        ]
