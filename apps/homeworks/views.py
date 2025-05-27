@@ -1,10 +1,12 @@
-from rest_framework import viewsets, mixins, filters
+from rest_framework import viewsets, mixins
 from rest_framework.permissions import IsAuthenticated
+from rest_framework.filters import OrderingFilter, SearchFilter
 from rest_framework_simplejwt.authentication import JWTAuthentication
 from django_filters.rest_framework import DjangoFilterBackend
 
 from apps.homeworks import models
 from apps.homeworks import serializers
+from apps.homeworks import filters
 
 
 class HomeworkViewSet(
@@ -18,10 +20,10 @@ class HomeworkViewSet(
 
     filter_backends = [
         DjangoFilterBackend,
-        filters.OrderingFilter,
-        filters.SearchFilter,
+        OrderingFilter,
+        SearchFilter,
     ]
-    filterset_fields = ["status"]
+    filterset_class = filters.HomeworkFilter
 
     def get_queryset(self):
         return (

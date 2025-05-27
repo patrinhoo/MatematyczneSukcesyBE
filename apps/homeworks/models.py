@@ -18,6 +18,11 @@ class Homework(models.Model):
         null=True,
         help_text="Data przesłania rozwiązania przez ucznia.",
     )
+    checked_at = models.DateTimeField(
+        blank=True,
+        null=True,
+        help_text="Data sprawdzenia rozwiązania przez nauczyciela.",
+    )
 
     assigned_by = models.ForeignKey(
         settings.AUTH_USER_MODEL,
