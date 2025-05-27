@@ -2,11 +2,15 @@ from django.db import models
 from django.conf import settings
 
 from apps.tasks import models as tasks_models
+from apps.homeworks.domain.enums.homeworks import HomeworkStatus
 
 
 class Homework(models.Model):
     title = models.CharField(max_length=255)
     description = models.TextField(blank=True)
+    status = models.CharField(
+        max_length=20, choices=HomeworkStatus.choices, default=HomeworkStatus.DRAFT
+    )
 
     due_date = models.DateTimeField(help_text="Deadline oddania pracy domowej.")
     submitted_at = models.DateTimeField(
@@ -31,7 +35,7 @@ class Homework(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
 
     def __str__(self):
-        return f"Praca domowa: {self.title} ({self.assigned_to.username})"
+        return f"Praca domowa: {self.title} ({self.assigned_to.given_name} {self.assigned_to.last_name})"
 
 
 class HomeworkTask(models.Model):
