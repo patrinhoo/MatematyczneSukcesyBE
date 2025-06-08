@@ -57,6 +57,7 @@ class TaskBlock(models.Model):
         max_length=20,
         choices=TaskBlockType,
     )
+    inline = models.BooleanField(default=False)
 
     # Tylko jedno z tych pól będzie wypełnione, w zależności od typu
     content = models.TextField(
