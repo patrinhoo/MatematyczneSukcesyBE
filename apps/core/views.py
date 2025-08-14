@@ -1,10 +1,10 @@
 from rest_framework import viewsets
 
-from apps.core import models
-from apps.core import serializers
+from apps.core.models.category_orm import CategoryOrm
+from apps.core.serializers.category import CategorySerializer
 
 
 class CategoryViewSet(viewsets.ReadOnlyModelViewSet):
-    queryset = models.Category.objects.all()
-    serializer_class = serializers.CategorySerializer
+    queryset = CategoryOrm.objects.all()
+    serializer_class = CategorySerializer
     pagination_class = None

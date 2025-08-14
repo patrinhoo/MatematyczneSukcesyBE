@@ -4,9 +4,14 @@ from rest_framework.filters import OrderingFilter, SearchFilter
 from rest_framework_simplejwt.authentication import JWTAuthentication
 from django_filters.rest_framework import DjangoFilterBackend
 
-from apps.homeworks import models
-from apps.homeworks import serializers
-from apps.homeworks import filters
+from apps.homeworks.filters.homework import HomeworkFilter
+from apps.homeworks.models.homework_orm import HomeworkOrm
+from apps.homeworks.models.homework_task_orm import HomeworkTaskOrm
+from apps.homeworks.serializers.homework import HomeworkSerializer
+from apps.homeworks.serializers.homework_task import (
+    HomeworkTaskSerializer,
+    HomeworkTaskSolutionUploadSerializer,
+)
 
 
 class HomeworkViewSet(
@@ -14,7 +19,7 @@ class HomeworkViewSet(
     mixins.RetrieveModelMixin,
     viewsets.GenericViewSet,
 ):
-    serializer_class = serializers.HomeworkSerializer
+    serializer_class = HomeworkSerializer
     authentication_classes = [JWTAuthentication]
     permission_classes = [IsAuthenticated]
 
@@ -23,11 +28,11 @@ class HomeworkViewSet(
         OrderingFilter,
         SearchFilter,
     ]
-    filterset_class = filters.HomeworkFilter
+    filterset_class = HomeworkFilter
 
     def get_queryset(self):
         return (
-            models.Homework.objects.filter(assigned_to=self.request.user)
+            HomeworkOrm.objects.filter(assigned_to=self.request.user)
             .select_related("assigned_by", "assigned_to")
             .prefetch_related("homework_tasks__task")
         )
@@ -44,11 +49,11 @@ class HomeworkTaskViewSet(
     http_method_names = ["get", "patch"]
 
     def get_queryset(self):
-        return models.HomeworkTask.objects.filter(
+        return HomeworkTaskOrm.objects.filter(
             homework__assigned_to=self.request.user
         ).select_related("homework", "task")
 
     def get_serializer_class(self):
         if self.action == "partial_update":
-            return serializers.HomeworkTaskSolutionUploadSerializer
-        return serializers.HomeworkTaskSerializer
+            return HomeworkTaskSolutionUploadSerializer
+        return HomeworkTaskSerializer

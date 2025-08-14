@@ -1,11 +1,10 @@
 from django.db import models
 from django.conf import settings
 
-from apps.tasks import models as tasks_models
 from apps.homeworks.domain.enums.homeworks import HomeworkStatus
 
 
-class Homework(models.Model):
+class HomeworkOrm(models.Model):
     title = models.CharField(max_length=255)
     description = models.TextField(blank=True)
     status = models.CharField(
@@ -13,6 +12,11 @@ class Homework(models.Model):
     )
 
     due_date = models.DateTimeField(help_text="Deadline oddania pracy domowej.")
+    ready_at = models.DateTimeField(
+        blank=True,
+        null=True,
+        help_text="Data oznaczenia zadania jako do zrobienia.",
+    )
     submitted_at = models.DateTimeField(
         blank=True,
         null=True,
@@ -41,24 +45,3 @@ class Homework(models.Model):
 
     def __str__(self):
         return f"Praca domowa: {self.title} ({self.assigned_to.given_name} {self.assigned_to.last_name})"
-
-
-class HomeworkTask(models.Model):
-    homework = models.ForeignKey(
-        Homework, on_delete=models.CASCADE, related_name="homework_tasks"
-    )
-    task = models.ForeignKey(
-        tasks_models.Task, on_delete=models.CASCADE, related_name="homework_tasks"
-    )
-
-    solution_file = models.FileField(
-        upload_to="homework_solutions/",
-        blank=True,
-        null=True,
-        help_text="Przesłane rozwiązanie (skan, zdjęcie, PDF, itd.).",
-    )
-    submitted_at = models.DateTimeField(
-        blank=True,
-        null=True,
-        help_text="Data przesłania rozwiązania przez ucznia.",
-    )

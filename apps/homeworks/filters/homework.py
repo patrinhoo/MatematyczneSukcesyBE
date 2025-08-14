@@ -1,5 +1,5 @@
 import django_filters
-from apps.homeworks import models
+from apps.homeworks.models.homework_orm import HomeworkOrm
 
 
 class HomeworkFilter(django_filters.FilterSet):
@@ -24,7 +24,7 @@ class HomeworkFilter(django_filters.FilterSet):
     )
 
     class Meta:
-        model = models.Homework
+        model = HomeworkOrm
         fields = [
             "status",
             "created_from",

@@ -1,8 +1,8 @@
 from rest_framework import mixins, viewsets, filters
 from django_filters.rest_framework import DjangoFilterBackend
 
-from apps.tasks import models
-from apps.tasks import serializers
+from apps.tasks.models.task_orm import TaskOrm
+from apps.tasks.serializers.task import TaskSerializer
 
 
 class TaskViewSet(
@@ -10,8 +10,8 @@ class TaskViewSet(
     mixins.RetrieveModelMixin,
     viewsets.GenericViewSet,
 ):
-    queryset = models.Task.objects.all()
-    serializer_class = serializers.TaskSerializer
+    queryset = TaskOrm.objects.all()
+    serializer_class = TaskSerializer
 
     filter_backends = [
         DjangoFilterBackend,
