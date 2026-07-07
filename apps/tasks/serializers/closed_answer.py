@@ -10,3 +10,28 @@ class ClosedAnswerSerializer(serializers.ModelSerializer):
             "task",
             "is_correct",
         ]
+
+
+class ClosedAnswerCreateSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = ClosedAnswerOrm
+        fields = [
+            "order",
+            "type",
+            "is_correct",
+            "content",
+            "image",
+        ]
+
+
+class ClosedAnswerManageSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = ClosedAnswerOrm
+        fields = [
+            "id",
+            "order",
+            "type",
+            "is_correct",
+            "content",
+            "image",
+        ]

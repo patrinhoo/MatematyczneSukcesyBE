@@ -12,6 +12,13 @@ class TaskDifficulty(models.TextChoices):
     HARD = "HARD"
 
 
+class TaskStatus(models.TextChoices):
+    NEW = "NEW"
+    WAITING_ACCEPT = "WAITING_ACCEPT"
+    ACCEPTED = "ACCEPTED"
+    REJECTED = "REJECTED"
+
+
 class EducationLevel(models.TextChoices):
     MATURA_BASIC = "MATURA_BASIC"
     MATURA_EXTENDED = "MATURA_EXTENDED"

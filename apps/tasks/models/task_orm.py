@@ -4,6 +4,7 @@ from django.conf import settings
 from apps.tasks.domain.enums.tasks import (
     TaskType,
     TaskDifficulty,
+    TaskStatus,
     EducationLevel,
 )
 
@@ -27,6 +28,11 @@ class TaskOrm(models.Model):
     difficulty = models.CharField(
         max_length=20,
         choices=TaskDifficulty.choices,
+    )
+    status = models.CharField(
+        max_length=20,
+        choices=TaskStatus.choices,
+        default=TaskStatus.NEW,
     )
 
     created_by = models.ForeignKey(

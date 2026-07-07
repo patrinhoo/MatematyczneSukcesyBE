@@ -10,3 +10,15 @@ class TaskBlockSerializer(serializers.ModelSerializer):
             "id",
             "task",
         ]
+
+
+class TaskBlockCreateSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = TaskBlockOrm
+        fields = [
+            "order",
+            "type",
+            "inline",
+            "content",
+            "image",
+        ]
